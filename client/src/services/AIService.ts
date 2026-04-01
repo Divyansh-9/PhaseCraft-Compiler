@@ -4,7 +4,7 @@ export interface AIResponse {
   type: 'analysis' | 'fix' | 'optimization' | 'chat';
 }
 
-const API_KEY = "AIzaSyBXQzos-4iBdUMBiya0kUlGyAzZmfVVxb8";
+const API_KEY = "put your api key here";
 
 export class AIService {
   private static async callAI(code: string, error: string | null, language: string): Promise<string> {
