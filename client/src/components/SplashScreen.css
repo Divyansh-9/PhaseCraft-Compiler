@@ -1,0 +1,343 @@
+/* SplashScreen.css */
+
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start; /* Changed from center to allow safe scrolling */
+  justify-content: center;
+  z-index: 9999;
+  overflow-y: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  padding: 20px; /* Add padding to prevent content strictly sticking to edges on scroll */
+  box-sizing: border-box;
+}
+
+/* Background Image Handling */
+.splash-background {
+  position: fixed; /* Use fixed to prevent scrolling with content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Try local file first, then fallback to high-quality Unsplash university image */
+  background-image: url('/background.jpg'), url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  /* Fallback gradient if image not found */
+  background-color: #1a1a2e; 
+  z-index: -2;
+  transition: transform 10s ease;
+  animation: slowZoom 20s infinite alternate;
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* Dark Overlay */
+.splash-overlay {
+  position: fixed; /* Use fixed to prevent scrolling with content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(20,20,40,0.75) 100%);
+  backdrop-filter: blur(3px);
+  z-index: -1;
+}
+
+/* Content Container */
+.splash-content {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  margin: auto; /* Uses flexbox auto margin for safe vertical centering */
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Animations */
+.fade-in-up {
+  animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Exit Animation */
+.splash-exit .splash-content {
+  animation: scaleOut 0.5s ease-in forwards;
+}
+.splash-exit .splash-background, 
+.splash-exit .splash-overlay {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+@keyframes scaleOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+}
+
+/* University Header */
+.university-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.uni-logo {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px;
+}
+
+.university-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ffffff, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* Subject Info */
+.subject-info {
+  font-size: 1.2rem;
+  color: #a0a0ff;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+/* Project Title */
+.project-title-wrapper {
+  margin: 20px 0;
+  position: relative;
+}
+
+.project-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(0, 204, 255, 0.4));
+  letter-spacing: -1px;
+}
+
+/* Updated Team Section */
+.team-container {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.team-header-title {
+  margin: 0 0 20px 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.member-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #00C6FF, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.member-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.member-card:hover::before {
+  opacity: 1;
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-details {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.member-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.member-role {
+  font-size: 0.8rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.member-role.lead {
+  color: #00f0ff;
+  font-weight: 600;
+}
+
+.member-section {
+  font-size: 0.8rem;
+  color: #666;
+  background: rgba(0,0,0,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* Original team section styles removal override */
+.team-section, .team-grid, .team-member, .team-member.highlight {
+  display: none;
+}
+
+/* Responsive adjustment for grid */
+@media (max-width: 600px) {
+  .members-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Start Button */
+.start-btn {
+  margin-top: 30px;
+  background: transparent;
+  border: none;
+  position: relative;
+  padding: 15px 60px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%);
+  box-shadow: 0 0 20px rgba(0, 114, 255, 0.4);
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 114, 255, 0.6);
+}
+
+.start-btn:active {
+  transform: translateY(1px);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .university-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .project-title {
+    font-size: 2.5rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .splash-content {
+    padding: 20px;
+    width: 90%;
+  }
+}

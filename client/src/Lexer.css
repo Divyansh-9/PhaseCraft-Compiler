@@ -1,0 +1,154 @@
+/* New Lexer Phase UI */
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.phase-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+.explanation-panel {
+  background: rgba(0, 240, 255, 0.05);
+  border-left: 3px solid var(--accent-primary);
+  padding: 15px;
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Lexer Card Grid */
+.lexer-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.lexer-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  padding: 10px 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.chip-container {
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.token-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Colors from requirements */
+.bg-purple { background-color: #a855f7; }
+.bg-blue { background-color: #3b82f6; }
+.bg-orange { background-color: #f97316; }
+.bg-gray { background-color: #6b7280; }
+.bg-green { background-color: #22c55e; }
+
+.border-purple { border-color: #a855f7; }
+.border-blue { border-color: #3b82f6; }
+.border-orange { border-color: #f97316; }
+.border-gray { border-color: #6b7280; }
+.border-green { border-color: #22c55e; }
+
+.text-purple { color: #d8b4fe; }
+.text-blue { color: #93c5fd; }
+.text-orange { color: #fdba74; }
+.text-gray { color: #d1d5db; }
+.text-green { color: #86efac; }
+
+/* Table Styles */
+.table-container {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.table-container h3 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  color: var(--text-main);
+  opacity: 0.9;
+}
+
+.lexer-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.lexer-table th, .lexer-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lexer-table th {
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lexer-table tr:last-child td {
+  border-bottom: none;
+}
+
+.hover-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.token-tag {
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.cat-badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-keywords { color: #d8b4fe; background: rgba(168, 85, 247, 0.2); }
+.badge-identifiers { color: #93c5fd; background: rgba(59, 130, 246, 0.2); }
+.badge-operators { color: #fdba74; background: rgba(249, 115, 22, 0.2); }
+.badge-separators { color: #d1d5db; background: rgba(107, 114, 128, 0.2); }
+.badge-numbers { color: #86efac; background: rgba(34, 197, 94, 0.2); }

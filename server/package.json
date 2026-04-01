@@ -1,0 +1,14 @@
+{
+  "name": "compiler-server",
+  "version": "1.0.0",
+  "description": "Express API server bridging React frontend to C compiler backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}

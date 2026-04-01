@@ -1,0 +1,51 @@
+# Logs and temp files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Builds and artifacts
+client/dist/
+dist/
+build/
+*.local
+
+# Environment and secrets
+.env
+.env.*
+
+# Editor metadata
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Compiler backend outputs
+compiler_c/compiler.exe
+compiler_c/*.exe
+compiler_c/*.o
+compiler_c/*.obj
+compiler_c/*.out
+
+# Test and coverage
+coverage/
+
+# Project task briefs (requested)
+Task_Abhishek.md
+Task_Dharmesh.md
+Task_Divyansh.md
+Task_Mahi.md

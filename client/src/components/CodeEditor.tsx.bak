@@ -1,0 +1,121 @@
+import React, { useRef } from 'react';
+import Editor, { Loader } from '@monaco-editor/react';
+
+// Ensure loader is initialized
+Loader.init();
+
+interface CodeEditorProps {
+  code: string;
+  language: string;
+  onChange: (value: string | undefined) => void;
+  readOnly?: boolean;
+}
+
+const CodeEditor: React.FC<CodeEditorProps> = ({ code, language, onChange, readOnly = false }) => {
+  const editorRef = useRef<any>(null);
+
+  const handleEditorWillMount = (monaco: any) => {
+    // 1. Register TalkScript Language Safe Guard
+    if (!monaco.languages.getLanguages().some((l: any) => l.id === 'talkscript')) {
+      monaco.languages.register({ id: 'talkscript' });
+
+      monaco.languages.setMonarchTokensProvider('talkscript', {
+        tokenizer: {
+          root: [
+            [/\b(create|number|text|show|if|otherwise|repeat|function|begin|end|program|variable|set|to|add|display|store|into|result|is|as|in|and)\b/, 'keyword'],
+            [/[a-zA-Z_]\w*(?=\()/, 'function'],
+            [/\d+/, 'number'],
+            [/"[^"]*"/, 'string'],
+            [/[=+\-*/><!&|]/, 'operator'],
+            [/[;{}(),.]/, 'delimiter'],
+            [/\/\/.*$/, 'comment'],
+            [/#.*$/, 'comment'],
+            [/[a-zA-Z_]\w*/, 'identifier'],
+          ]
+        }
+      });
+
+      monaco.editor.defineTheme('compiler-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [
+          { token: 'keyword', foreground: '569CD6', fontStyle: 'bold' },
+          { token: 'identifier', foreground: 'D4D4D4' },
+          { token: 'number', foreground: 'CE9178' },
+          { token: 'string', foreground: '6A9955' },
+          { token: 'operator', foreground: 'C586C0' },
+          { token: 'delimiter', foreground: 'DCDCAA' },
+          { token: 'comment', foreground: '6A9955', fontStyle: 'italic' },
+          { token: 'function', foreground: '4EC9B0' },
+        ],
+        colors: {
+          'editor.background': '#1E1E1E',
+          'editor.foreground': '#D4D4D4',
+          'editorCursor.foreground': '#FFFFFF',
+          'editor.lineHighlightBackground': '#2D2D30',
+          'editorLineNumber.foreground': '#858585',
+          'editor.selectionBackground': '#264F78',
+          'editor.inactiveSelectionBackground': '#3A3D41'
+        }
+      });
+    }
+  };
+
+  const handleEditorDidMount = (editor: any, monaco: any) => {
+    editorRef.current = editor;
+    monaco.editor.setTheme('compiler-dark');
+  };
+
+  const getMonacoLanguage = (lang: string) => {
+    switch(lang) {
+      case 'C': return 'c';
+      case 'CPP': return 'cpp';
+      case 'Java': return 'java';
+      case 'Python': return 'python';
+      case 'TalkScript': return 'talkscript';
+      default: return 'c';
+    }
+  };
+
+  return (
+    <div style={{ height: '100%', width: '100%', borderRadius: '0 0 8px 8px', overflow: 'hidden', border: '1px solid #333', position: 'relative', backgroundColor: '#1E1E1E' }}>
+      <Editor
+        height="100%"
+        width="100%"
+        language={getMonacoLanguage(language)}
+        value={code}
+        theme="compiler-dark"
+        beforeMount={handleEditorWillMount}
+        onMount={handleEditorDidMount}
+        onChange={onChange}
+        loading={
+          <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888' }}>
+            Initializing Editor...
+          </div>
+        }
+        options={{
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          fontSize: 14,
+          fontFamily: "'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace",
+          fontLigatures: true,
+          automaticLayout: true,
+          cursorBlinking: 'smooth',
+          cursorSmoothCaretAnimation: 'on',
+          smoothScrolling: true,
+          contextmenu: true,
+          formatOnPaste: true,
+          formatOnType: true,
+          readOnly: readOnly,
+          lineNumbers: 'on',
+          renderLineHighlight: 'all',
+          bracketPairColorization: { enabled: true },
+          autoClosingBrackets: 'always',
+          padding: { top: 10, bottom: 10 }
+        }}
+      />
+    </div>
+  );
+};
+
+export default CodeEditor;

@@ -1,0 +1,197 @@
+/* Code Generator Phase Styles */
+
+.codegen-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 15px;
+}
+
+.cg-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 15px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cg-panel {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.cg-header {
+  padding: 10px 15px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Terminal / Assembly View */
+.terminal-view {
+  flex: 1;
+  padding: 15px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background-color: #0d1117;
+  color: #e6edf3;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.asm-line {
+  display: flex;
+  padding: 2px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+}
+
+.asm-line:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.asm-line.active {
+  background: rgba(78, 201, 176, 0.1);
+  border-left-color: var(--accent-success);
+}
+
+.asm-indent {
+  padding-left: 20px;
+}
+
+.asm-comment {
+  color: #6a9955;
+  margin-left: 15px;
+  font-style: italic;
+}
+
+/* Data Tables (Registers, Memory) */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 8px 12px;
+  color: var(--text-dim);
+  font-weight: normal;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.02);
+}
+
+.data-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-mono);
+}
+
+.reg-name {
+  color: #f97316; /* Orange */
+  font-weight: bold;
+}
+
+.reg-val {
+  color: #9cdcfe;
+}
+
+.mem-addr {
+  color: #569cd6; /* Blueish */
+}
+
+.mem-var {
+  color: #dcdcaa; /* Yellowish */
+}
+
+/* Logs */
+.log-list {
+  padding: 10px;
+  font-size: 0.8rem;
+  color: #aaa;
+  overflow-y: auto;
+}
+
+.log-item {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.success-banner {
+  background: rgba(46, 160, 67, 0.15);
+  border: 1px solid #2ea043;
+  color: #3fb950;
+  padding: 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* C++ Code Tab Styles */
+.codegen-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.codegen-tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.codegen-tab:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.03);
+}
+
+.codegen-tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.cpp-output-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 10px;
+}
+
+.cpp-code-view {
+  font-size: 0.95rem !important;
+  line-height: 1.8 !important;
+}
+
+.cpp-code-view .line-number {
+  display: inline-block;
+  width: 35px;
+  text-align: right;
+  margin-right: 15px;
+  color: #555;
+  font-size: 0.8em;
+  user-select: none;
+}

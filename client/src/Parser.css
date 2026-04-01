@@ -1,0 +1,242 @@
+/* Parser Phase Styles */
+
+.parser-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+}
+
+/* Remove grid-template-columns when using the resize component logic */
+.parser-layout {
+  display: grid;
+  /* grid-template-columns: 3fr 1fr; removed - handled inline */
+  gap: 0; /* Gap handled by resizer width */
+  height: 100%;
+  overflow: hidden;
+}
+
+.resize-handle {
+  width: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: col-resize;
+  transition: background 0.2s;
+  height: 100%;
+}
+
+.resize-handle:hover, .resize-handle.active {
+  background: var(--accent-primary);
+}
+
+/* Tree Visualization Container */
+
+/* Tree Visualization Container */
+.tree-viewport {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: auto; /* Enable scrolling for large trees */
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Side Panel */
+.parser-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  padding-left: 15px; /* Add padding since gap was removed */
+}
+
+.grammar-panel, .status-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.panel-title {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 5px;
+}
+
+.rule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+
+.rule-item {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rule-item:last-child {
+  border-bottom: none;
+}
+
+.status-valid {
+  color: var(--accent-success);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.status-invalid {
+  color: var(--accent-error);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+/* CSS-only Tree Implementation */
+.tf-tree {
+  font-size: 12px;
+  overflow: visible;
+}
+
+.tf-tree ul {
+  display: flex;
+  position: relative;
+  padding: 20px 0 0;
+  margin: 0;
+  transition: all 0.5s;
+}
+
+.tf-tree li {
+  display: flex;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Connectors */
+.tf-tree li::before, .tf-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid var(--border-color);
+  width: 50%;
+  height: 20px;
+}
+
+.tf-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid var(--border-color);
+}
+
+/* Remove connectors from only child */
+.tf-tree li:only-child::after, .tf-tree li:only-child::before {
+  display: none;
+}
+
+/* Remove space from top of single children */
+.tf-tree li:only-child { 
+  padding-top: 0;
+}
+
+/* Remove left connector from first child and right connector from last child */
+.tf-tree li:first-child::before, .tf-tree li:last-child::after {
+  border: 0 none;
+}
+
+/* Adding back the vertical connector to the last nodes */
+.tf-tree li:last-child::before {
+  border-right: 1px solid var(--border-color);
+  border-radius: 0 5px 0 0;
+}
+
+.tf-tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+/* Downward connector from parent */
+.tf-tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid var(--border-color);
+  width: 0;
+  height: 20px;
+}
+
+/* Node Styles */
+.tf-nc {
+  padding: 10px 15px;
+  border: 1px solid var(--accent-primary);
+  border-radius: 50px; /* Circular/Pill shape */
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--text-main);
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s;
+  min-width: 60px;
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  
+  /* Animation */
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+}
+
+.tf-nc:hover {
+  background-color: var(--accent-primary);
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--accent-primary);
+}
+
+.tf-nc.node-program { border-color: #d8b4fe; color: #d8b4fe; }
+.tf-nc.node-decl { border-color: #3b82f6; color: #3b82f6; }
+.tf-nc.node-expr { border-color: #f97316; color: #f97316; }
+.tf-nc.node-print { border-color: #22c55e; color: #22c55e; }
+.tf-nc.node-leaf { border-color: #94a3b8; color: #e2e8f0; background: rgba(255,255,255,0.05); font-size: 0.85em;}
+
+.tf-nc:hover.node-program { background: #d8b4fe; color: #000; }
+.tf-nc:hover.node-decl { background: #3b82f6; color: #000; }
+.tf-nc:hover.node-expr { background: #f97316; color: #000; }
+.tf-nc:hover.node-print { background: #22c55e; color: #000; }
+
+.node-label {
+  font-weight: bold;
+  display: block;
+}
+
+.node-value {
+  font-size: 0.8em;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Stagger animations */
+.tf-tree ul li:nth-child(1) .tf-nc { animation-delay: 0.1s; }
+.tf-tree ul li:nth-child(2) .tf-nc { animation-delay: 0.3s; }
+.tf-tree ul li:nth-child(3) .tf-nc { animation-delay: 0.5s; }
+.tf-tree ul li ul li .tf-nc { animation-delay: 0.7s; }
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
