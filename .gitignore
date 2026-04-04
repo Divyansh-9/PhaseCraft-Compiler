@@ -44,6 +44,12 @@ compiler_c/*.out
 # Test and coverage
 coverage/
 
+# Member profile images
+client/public/member1.jpg
+client/public/member2.jpg
+client/public/member3.jpg
+client/public/member4.jpg
+
 # Project task briefs (requested)
 Task_Abhishek.md
 Task_Dharmesh.md
